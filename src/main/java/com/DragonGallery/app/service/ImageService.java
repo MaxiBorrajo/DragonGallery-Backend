@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Map;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,7 @@ public class ImageService {
         File file = new File(multipartFile.getOriginalFilename());
         FileOutputStream fo = new FileOutputStream(file);
         fo.write(multipartFile.getBytes());
+        fo.close();
         return file;
     }
 
