@@ -11,10 +11,14 @@
     <groupId>com.DragonGallery</groupId>
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>app</name>
-    <description>Galería de imagenes, videos, gif y más.</description>
+    <name>dragongallery</name>
+    <description>Galería de imagenes.</description>
     <properties>
         <java.version>19</java.version>
+        <source>19</source> 
+        <target>19</target> 
+        <testSource>19</testSource> 
+        <testTarget>19</testTarget>
     </properties>
     <dependencies>
         <dependency>
