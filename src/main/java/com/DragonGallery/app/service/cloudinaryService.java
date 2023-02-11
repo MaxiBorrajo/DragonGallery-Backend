@@ -4,6 +4,7 @@
  */
 package com.DragonGallery.app.service;
 
+import com.DragonGallery.app.model.FileEntity;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.File;
@@ -22,18 +23,18 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Maximiliano Borrajo
  */
 @Service
-public class ImageService {
+public class cloudinaryService {
 
     Cloudinary cloudinary;
 
-    public ImageService() {
+    public cloudinaryService() {
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "dxbixgv6n",
                 "api_key", "213687998788369",
                 "api_secret", "GZfC36uYWBVKm5WMw0PhRIIQoD4"));
     }
 
-    public Map upload(MultipartFile multipartFile) throws IOException, Exception {
+    public Map uploadImage(MultipartFile multipartFile) throws IOException, Exception {
         File file = convert(multipartFile);
         Map params1 = ObjectUtils.asMap(
                 "use_filename", true,
@@ -43,9 +44,25 @@ public class ImageService {
         return result;
     }
 
-    public Map delete(String id) throws IOException {
-        Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
+    public Map uploadVideo(MultipartFile multipartFile) throws IOException, Exception {
+        File file = convert(multipartFile);
+        Map params1 = ObjectUtils.asMap(
+                "resource_type", "video",
+                "use_filename", true,
+                "unique_filename", true);
+        Map result = cloudinary.uploader().upload(file, params1);
+        file.delete();
         return result;
+    }
+
+    public Map delete(FileEntity file) throws IOException {
+        if (file.getFormat().equals("video")) {
+            Map result = cloudinary.uploader().destroy(file.getCloud_id(), ObjectUtils.asMap("resource_type", "video"));
+            return result;
+        }else{
+            Map result = cloudinary.uploader().destroy( file.getCloud_id(), ObjectUtils.emptyMap());
+            return result;
+        }
     }
 
     private File convert(MultipartFile multipartFile) throws IOException {
@@ -56,8 +73,15 @@ public class ImageService {
         return file;
     }
 
-    public Map details(String public_id) throws Exception {
-        Map result = cloudinary.api().resource(public_id, ObjectUtils.asMap("versions", true));
-        return result;
+    public Map details(FileEntity file) throws Exception {
+        if (file.getFormat().equals("video")) {
+            Map result = cloudinary.api().resource(file.getCloud_id(),
+                    ObjectUtils.asMap("versions", true, "resource_type", "video"));
+            return result;
+        }else{
+            Map result = cloudinary.api().resource(file.getCloud_id(),
+                    ObjectUtils.asMap("versions", true));
+            return result;
+        }
     }
 }

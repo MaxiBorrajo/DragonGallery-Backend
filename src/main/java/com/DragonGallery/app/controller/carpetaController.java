@@ -6,10 +6,10 @@ package com.DragonGallery.app.controller;
 
 import com.DragonGallery.app.dto.Message;
 import com.DragonGallery.app.model.Carpeta;
-import com.DragonGallery.app.model.Imagen;
+import com.DragonGallery.app.model.FileEntity;
 import com.DragonGallery.app.service.CarpetaService;
-import com.DragonGallery.app.service.ImageService;
-import com.DragonGallery.app.service.ImgEntityService;
+import com.DragonGallery.app.service.cloudinaryService;
+import com.DragonGallery.app.service.fileService;
 import java.lang.reflect.Array;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("folder")
 @CrossOrigin
 public class carpetaController {
-    @Autowired
-    ImageService imgService;
-    
-    @Autowired
-    ImgEntityService imgEntityService;
     
     @Autowired
     CarpetaService carpetaService;
@@ -57,14 +52,14 @@ public class carpetaController {
         return carpetaService.getFolderByName(name);
     }
     
-    @GetMapping("getImagesOfFolder")
-    public List<Imagen> getImagesOfFolderById(@RequestParam int id){
-        return carpetaService.getImagesOfFolderById(id);
+    @GetMapping("getFilesOfFolder")
+    public List<FileEntity> getFilesOfFolderById(@RequestParam int id){
+        return carpetaService.getFilesOfFolderById(id);
     }
     
-    @GetMapping("getImagesOfFolder/{name}")
-    public List<Imagen> getImagesOfFolderByName(@PathVariable String name){
-        return carpetaService.getImagesOfFolderByName(name);
+    @GetMapping("getFilesOfFolder/{name}")
+    public List<FileEntity> getFilesOfFolderByName(@PathVariable String name){
+        return carpetaService.getFilesOfFolderByName(name);
     }
     
     @PostMapping("create")

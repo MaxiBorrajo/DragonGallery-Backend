@@ -28,5 +28,5 @@ public class Carpeta {
     private String name;
     @OneToMany(mappedBy="carpeta", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Imagen> imagenes;
+    private List<FileEntity> files;
 }

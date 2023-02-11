@@ -4,13 +4,13 @@
  */
 package com.DragonGallery.app.service;
 
-import com.DragonGallery.app.model.Imagen;
-import com.DragonGallery.app.repository.imgRepository;
+import com.DragonGallery.app.model.FileEntity;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.DragonGallery.app.repository.fileRepository;
 
 /**
  *
@@ -18,27 +18,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
-public class ImgEntityService {
+public class fileService {
     @Autowired
-    imgRepository imgRepository;
+    fileRepository fileRepo;
     
-    public List<Imagen> getListOfImages(){
-        return imgRepository.findByOrderById();
+    public List<FileEntity> getListOfFiles(){
+        return fileRepo.findByOrderById();
     }
     
-    public Optional<Imagen> getImageById(int id){
-        return imgRepository.findById(id);
+    public Optional<FileEntity> getFileById(int id){
+        return fileRepo.findById(id);
     }
     
-    public void saveImg(Imagen imagen){
-        imgRepository.save(imagen);
+    public void saveFile(FileEntity file){
+        fileRepo.save(file);
     }
     
     public void delete(int id){
-        imgRepository.deleteById(id);
+        fileRepo.deleteById(id);
     }
     
-    public boolean existsImageById(int id){
-        return imgRepository.existsById(id);
+    public boolean existsFileById(int id){
+        return fileRepo.existsById(id);
     }
 }
