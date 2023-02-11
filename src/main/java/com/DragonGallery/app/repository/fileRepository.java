@@ -4,7 +4,7 @@
  */
 package com.DragonGallery.app.repository;
 
-import com.DragonGallery.app.model.Imagen;
+import com.DragonGallery.app.model.FileEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author Maximiliano Borrajo
  */
 @Repository
-public interface imgRepository extends JpaRepository<Imagen, Integer>{
-    List<Imagen> findByOrderById();
+public interface fileRepository extends JpaRepository<FileEntity, Integer>{
+    List<FileEntity> findByOrderById();
 }

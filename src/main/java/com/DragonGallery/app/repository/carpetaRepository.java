@@ -5,7 +5,7 @@
 package com.DragonGallery.app.repository;
 
 import com.DragonGallery.app.model.Carpeta;
-import com.DragonGallery.app.model.Imagen;
+import com.DragonGallery.app.model.FileEntity;
 import java.lang.reflect.Array;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

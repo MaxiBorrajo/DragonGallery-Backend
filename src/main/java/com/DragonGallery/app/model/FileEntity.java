@@ -22,13 +22,14 @@ import lombok.Setter;
  */
 @Entity
 @Data
-public class Imagen {
+public class FileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String url;
     private String cloud_id;
+    private String format;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="carpeta_id", nullable=false)

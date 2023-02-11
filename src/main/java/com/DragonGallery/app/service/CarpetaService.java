@@ -5,7 +5,7 @@
 package com.DragonGallery.app.service;
 
 import com.DragonGallery.app.model.Carpeta;
-import com.DragonGallery.app.model.Imagen;
+import com.DragonGallery.app.model.FileEntity;
 import com.DragonGallery.app.repository.carpetaRepository;
 import jakarta.transaction.Transactional;
 import java.lang.reflect.Array;
@@ -28,14 +28,14 @@ public class CarpetaService {
         return carpetaRepository.findAll();
     }
     
-    public List<Imagen> getImagesOfFolderById(int id){
+    public List<FileEntity> getFilesOfFolderById(int id){
         Carpeta carpeta = carpetaRepository.findById(id).orElse(null);
-        return carpeta.getImagenes();
+        return carpeta.getFiles();
     }
     
-    public List<Imagen> getImagesOfFolderByName(String name){
+    public List<FileEntity> getFilesOfFolderByName(String name){
         Carpeta carpeta = carpetaRepository.findByName(name);
-        return carpeta.getImagenes();
+        return carpeta.getFiles();
     }
     
     public Optional<Carpeta> getFolderById(int id){
