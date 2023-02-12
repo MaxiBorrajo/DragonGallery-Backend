@@ -15,8 +15,6 @@
     <description>Galería de imagenes.</description>
     <properties>
         <java.version>19</java.version>
-        <source>19</source> 
-        <target>19</target>
     </properties>
     <dependencies>
         <dependency>
@@ -88,15 +86,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <source>19</source>
-                    <target>19</target>
                 </configuration>
             </plugin>
         </plugins>
