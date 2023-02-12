@@ -71,18 +71,9 @@ public class FileController {
             file.setCloud_id((String) result.get("public_id"));
             file.setFormat("image");
             Folder folder = folderService.getFolderByName(folder_name);
-            if (folder == null) {
-                Folder newFolder = new Folder();
-                newFolder.setName("allPhotos");
-                folderService.saveFolder(newFolder);
-                file.setCarpeta(newFolder);
-                fileService.saveFile(file);
-                return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
-            } else {
-                file.setCarpeta(folder);
-                fileService.saveFile(file);
-                return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
-            }
+            file.setCarpeta(folder);
+            fileService.saveFile(file);
+            return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
         } else if (multipartFile.getContentType().startsWith("video/")) {
             Map result = cloudinaryService.uploadVideo(multipartFile);
             FileEntity file = new FileEntity();
