@@ -2,7 +2,7 @@ com\DragonGallery\app\repository\FileRepository.class
 com\DragonGallery\app\model\Folder.class
 com\DragonGallery\app\service\FolderService.class
 com\DragonGallery\app\model\FileEntity.class
-com\DragonGallery\app\AppApplication.class
+com\DragonGallery\app\Main.class
 com\DragonGallery\app\service\FileService.class
 com\DragonGallery\app\controller\FileController.class
 com\DragonGallery\app\repository\FolderRepository.class
