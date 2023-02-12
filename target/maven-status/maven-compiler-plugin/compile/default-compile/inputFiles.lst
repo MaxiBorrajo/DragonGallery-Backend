@@ -5,6 +5,7 @@ D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\se
 D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\Main.java
 D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\service\FileService.java
 D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\model\Folder.java
+D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\Config\CorsConfig.java
 D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\controller\FolderController.java
 D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\dto\Message.java
 D:\website-projects\dragongallery-backend\src\main\java\com\DragonGallery\app\repository\FolderRepository.java
