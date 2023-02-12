@@ -5,11 +5,11 @@
 package com.DragonGallery.app.controller;
 
 import com.DragonGallery.app.dto.Message;
-import com.DragonGallery.app.model.Carpeta;
+import com.DragonGallery.app.model.Folder;
 import com.DragonGallery.app.model.FileEntity;
-import com.DragonGallery.app.service.CarpetaService;
-import com.DragonGallery.app.service.cloudinaryService;
-import com.DragonGallery.app.service.fileService;
+import com.DragonGallery.app.service.FolderService;
+import com.DragonGallery.app.service.CloudinaryService;
+import com.DragonGallery.app.service.FileService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -34,16 +34,16 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("img")
 @CrossOrigin
-public class fileController {
+public class FileController {
 
     @Autowired
-    cloudinaryService cloudinaryService;
+    CloudinaryService cloudinaryService;
 
     @Autowired
-    fileService fileService;
+    FileService fileService;
 
     @Autowired
-    CarpetaService carpetaService;
+    FolderService folderService;
 
     @GetMapping("getFiles")
     public ResponseEntity<List<FileEntity>> getFile() {
@@ -70,19 +70,28 @@ public class fileController {
             file.setUrl((String) result.get("url"));
             file.setCloud_id((String) result.get("public_id"));
             file.setFormat("image");
-            Carpeta carpeta = carpetaService.getFolderByName(folder_name);
-            file.setCarpeta(carpeta);
-            fileService.saveFile(file);
-            return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
-        }else if(multipartFile.getContentType().startsWith("video/")) {
+            Folder folder = folderService.getFolderByName(folder_name);
+            if (folder == null) {
+                Folder newFolder = new Folder();
+                newFolder.setName("allPhotos");
+                folderService.saveFolder(newFolder);
+                file.setCarpeta(newFolder);
+                fileService.saveFile(file);
+                return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
+            }else{
+                file.setCarpeta(folder);
+                fileService.saveFile(file);
+                return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
+            }
+        } else if (multipartFile.getContentType().startsWith("video/")) {
             Map result = cloudinaryService.uploadVideo(multipartFile);
             FileEntity file = new FileEntity();
             file.setName((String) result.get("original_filename"));
             file.setUrl((String) result.get("url"));
             file.setCloud_id((String) result.get("public_id"));
             file.setFormat("video");
-            Carpeta carpeta = carpetaService.getFolderByName(folder_name);
-            file.setCarpeta(carpeta);
+            Folder folder = folderService.getFolderByName(folder_name);
+            file.setCarpeta(folder);
             fileService.saveFile(file);
             return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
         } else {
@@ -99,7 +108,7 @@ public class fileController {
 
     @PostMapping("move")
     public ResponseEntity<?> move(@RequestBody FileEntity file, @RequestParam int id_folder) {
-        Carpeta carpeta = carpetaService.getFolderById(id_folder).orElse(null);
+        Folder carpeta = folderService.getFolderById(id_folder).orElse(null);
         file.setCarpeta(carpeta);
         fileService.saveFile(file);
         return new ResponseEntity(new Message("Moved Succesfully"), HttpStatus.OK);

@@ -21,7 +21,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-public class Carpeta {
+public class Folder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -5,11 +5,11 @@
 package com.DragonGallery.app.controller;
 
 import com.DragonGallery.app.dto.Message;
-import com.DragonGallery.app.model.Carpeta;
+import com.DragonGallery.app.model.Folder;
 import com.DragonGallery.app.model.FileEntity;
-import com.DragonGallery.app.service.CarpetaService;
-import com.DragonGallery.app.service.cloudinaryService;
-import com.DragonGallery.app.service.fileService;
+import com.DragonGallery.app.service.FolderService;
+import com.DragonGallery.app.service.CloudinaryService;
+import com.DragonGallery.app.service.FileService;
 import java.lang.reflect.Array;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,23 +32,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("folder")
 @CrossOrigin
-public class carpetaController {
+public class FolderController {
     
     @Autowired
-    CarpetaService carpetaService;
+    FolderService carpetaService;
     
     @GetMapping("allFolders")
-    public List<Carpeta> getAllFolders(){
+    public List<Folder> getAllFolders(){
         return carpetaService.getListOfFolders();
     }
     
     @GetMapping("getFolder")
-    public Carpeta getFolder(@RequestParam int id){
+    public Folder getFolder(@RequestParam int id){
         return carpetaService.getFolderById(id).orElse(null);
     }
     
     @GetMapping("getFolder/{name}")
-    public Carpeta getFolder(@PathVariable String name){
+    public Folder getFolder(@PathVariable String name){
         return carpetaService.getFolderByName(name);
     }
     
@@ -63,13 +63,13 @@ public class carpetaController {
     }
     
     @PostMapping("create")
-    public ResponseEntity<?> saveFolder(@RequestBody Carpeta carpeta){
+    public ResponseEntity<?> saveFolder(@RequestBody Folder carpeta){
         carpetaService.saveFolder(carpeta);
         return new ResponseEntity(new Message("Folder Created"), HttpStatus.OK);
     }
     
     @PostMapping("rename")
-    public ResponseEntity<?> rename(@RequestBody Carpeta carpeta, @RequestParam String name){
+    public ResponseEntity<?> rename(@RequestBody Folder carpeta, @RequestParam String name){
         carpeta.setName(name);
         carpetaService.saveFolder(carpeta);
         return new ResponseEntity(new Message("Rename Uploaded"), HttpStatus.OK);

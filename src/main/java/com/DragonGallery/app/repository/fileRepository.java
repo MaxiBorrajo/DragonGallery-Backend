@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author Maximiliano Borrajo
  */
 @Repository
-public interface fileRepository extends JpaRepository<FileEntity, Integer>{
+public interface FileRepository extends JpaRepository<FileEntity, Integer>{
     List<FileEntity> findByOrderById();
 }

@@ -4,7 +4,7 @@
  */
 package com.DragonGallery.app.repository;
 
-import com.DragonGallery.app.model.Carpeta;
+import com.DragonGallery.app.model.Folder;
 import com.DragonGallery.app.model.FileEntity;
 import java.lang.reflect.Array;
 import java.util.List;
@@ -16,6 +16,6 @@ import org.springframework.stereotype.Repository;
  * @author Maximiliano Borrajo
  */
 @Repository
-public interface carpetaRepository extends JpaRepository<Carpeta, Integer>{
-    public Carpeta findByName(String name);
+public interface FolderRepository extends JpaRepository<Folder, Integer>{
+    public Folder findByName(String name);
 }

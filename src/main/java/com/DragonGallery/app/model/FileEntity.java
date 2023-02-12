@@ -33,5 +33,5 @@ public class FileEntity {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="carpeta_id", nullable=false)
-    private Carpeta carpeta;
+    private Folder carpeta;
 }

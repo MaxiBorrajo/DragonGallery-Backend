@@ -23,11 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Maximiliano Borrajo
  */
 @Service
-public class cloudinaryService {
+public class CloudinaryService {
 
     Cloudinary cloudinary;
 
-    public cloudinaryService() {
+    public CloudinaryService() {
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "dxbixgv6n",
                 "api_key", "213687998788369",

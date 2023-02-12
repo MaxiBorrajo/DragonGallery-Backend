@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.DragonGallery.app.repository.fileRepository;
+import com.DragonGallery.app.repository.FileRepository;
 
 /**
  *
@@ -18,9 +18,9 @@ import com.DragonGallery.app.repository.fileRepository;
  */
 @Service
 @Transactional
-public class fileService {
+public class FileService {
     @Autowired
-    fileRepository fileRepo;
+    FileRepository fileRepo;
     
     public List<FileEntity> getListOfFiles(){
         return fileRepo.findByOrderById();

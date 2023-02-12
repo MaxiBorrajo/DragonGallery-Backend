@@ -4,15 +4,15 @@
  */
 package com.DragonGallery.app.service;
 
-import com.DragonGallery.app.model.Carpeta;
+import com.DragonGallery.app.model.Folder;
 import com.DragonGallery.app.model.FileEntity;
-import com.DragonGallery.app.repository.carpetaRepository;
 import jakarta.transaction.Transactional;
 import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.DragonGallery.app.repository.FolderRepository;
 
 /**
  *
@@ -20,33 +20,33 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
-public class CarpetaService {
+public class FolderService {
     @Autowired
-    carpetaRepository carpetaRepository;
+    FolderRepository carpetaRepository;
     
-    public List<Carpeta> getListOfFolders(){
+    public List<Folder> getListOfFolders(){
         return carpetaRepository.findAll();
     }
     
     public List<FileEntity> getFilesOfFolderById(int id){
-        Carpeta carpeta = carpetaRepository.findById(id).orElse(null);
+        Folder carpeta = carpetaRepository.findById(id).orElse(null);
         return carpeta.getFiles();
     }
     
     public List<FileEntity> getFilesOfFolderByName(String name){
-        Carpeta carpeta = carpetaRepository.findByName(name);
+        Folder carpeta = carpetaRepository.findByName(name);
         return carpeta.getFiles();
     }
     
-    public Optional<Carpeta> getFolderById(int id){
+    public Optional<Folder> getFolderById(int id){
         return carpetaRepository.findById(id);
     }
     
-    public Carpeta getFolderByName(String name){
+    public Folder getFolderByName(String name){
         return carpetaRepository.findByName(name);
     }
     
-    public void saveFolder(Carpeta folder){
+    public void saveFolder(Folder folder){
         carpetaRepository.save(folder);
     }
     
@@ -55,7 +55,7 @@ public class CarpetaService {
     }
     
     public void deleteByName(String name){
-        Carpeta carpeta = carpetaRepository.findByName(name);
+        Folder carpeta = carpetaRepository.findByName(name);
         carpetaRepository.deleteById(carpeta.getId());
     }
 }
