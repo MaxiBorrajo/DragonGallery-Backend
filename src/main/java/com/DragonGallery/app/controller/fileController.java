@@ -45,22 +45,26 @@ public class FileController {
     @Autowired
     FolderService folderService;
 
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getFiles")
     public ResponseEntity<List<FileEntity>> getFile() {
         return new ResponseEntity(fileService.getListOfFiles(), HttpStatus.OK);
     }
 
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getFile/{id}")
     public ResponseEntity<FileEntity> getFileById(@PathVariable int id) {
         return new ResponseEntity(fileService.getFileById(id), HttpStatus.OK);
     }
 
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getDetails/{id}")
     public Map getDetailsById(@PathVariable int id) throws Exception {
         FileEntity file = fileService.getFileById(id).orElse(null);
         return cloudinaryService.details(file);
     }
 
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile, @RequestParam(defaultValue = "allPhotos") String folder_name) throws IOException, Exception {
         if (multipartFile.getContentType().startsWith("image/")) {
@@ -78,7 +82,7 @@ public class FileController {
                 file.setCarpeta(newFolder);
                 fileService.saveFile(file);
                 return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
-            }else{
+            } else {
                 file.setCarpeta(folder);
                 fileService.saveFile(file);
                 return new ResponseEntity(new Message("File Uploaded"), HttpStatus.OK);
@@ -99,6 +103,7 @@ public class FileController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("rename")
     public ResponseEntity<?> rename(@RequestBody FileEntity file, @RequestParam String name) {
         file.setName(name);
@@ -106,6 +111,7 @@ public class FileController {
         return new ResponseEntity(new Message("Rename Uploaded"), HttpStatus.OK);
     }
 
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("move")
     public ResponseEntity<?> move(@RequestBody FileEntity file, @RequestParam int id_folder) {
         Folder carpeta = folderService.getFolderById(id_folder).orElse(null);
@@ -114,6 +120,7 @@ public class FileController {
         return new ResponseEntity(new Message("Moved Succesfully"), HttpStatus.OK);
     }
 
+    @CrossOrigin("http://localhost:4200")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) throws IOException {
         if (fileService.existsFileById(id)) {

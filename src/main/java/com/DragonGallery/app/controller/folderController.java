@@ -37,37 +37,44 @@ public class FolderController {
     @Autowired
     FolderService carpetaService;
     
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("allFolders")
     public List<Folder> getAllFolders(){
         return carpetaService.getListOfFolders();
     }
     
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getFolder")
     public Folder getFolder(@RequestParam int id){
         return carpetaService.getFolderById(id).orElse(null);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getFolder/{name}")
     public Folder getFolder(@PathVariable String name){
         return carpetaService.getFolderByName(name);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getFilesOfFolder")
     public List<FileEntity> getFilesOfFolderById(@RequestParam int id){
         return carpetaService.getFilesOfFolderById(id);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("getFilesOfFolder/{name}")
     public List<FileEntity> getFilesOfFolderByName(@PathVariable String name){
         return carpetaService.getFilesOfFolderByName(name);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("create")
     public ResponseEntity<?> saveFolder(@RequestBody Folder carpeta){
         carpetaService.saveFolder(carpeta);
         return new ResponseEntity(new Message("Folder Created"), HttpStatus.OK);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("rename")
     public ResponseEntity<?> rename(@RequestBody Folder carpeta, @RequestParam String name){
         carpeta.setName(name);
@@ -75,12 +82,14 @@ public class FolderController {
         return new ResponseEntity(new Message("Rename Uploaded"), HttpStatus.OK);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @DeleteMapping("delete")
     public ResponseEntity<?> deleteFolderById(@RequestParam int id){
         carpetaService.delete(id);
         return new ResponseEntity(new Message("Folder Deleted"), HttpStatus.OK);
     }
     
+    @CrossOrigin("http://localhost:4200")
     @DeleteMapping("delete/{name}")
     public ResponseEntity<?> deleteFolderByName(@PathVariable String name){
         carpetaService.deleteByName(name);
