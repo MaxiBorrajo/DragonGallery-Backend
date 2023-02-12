@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("folder")
-@CrossOrigin
+@CrossOrigin("*")
 public class FolderController {
     
     @Autowired

@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @RequestMapping("img")
-@CrossOrigin
+@CrossOrigin("*")
 public class FileController {
 
     @Autowired
