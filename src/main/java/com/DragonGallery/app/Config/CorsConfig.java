@@ -21,7 +21,7 @@ public class CorsConfig extends OncePerRequestFilter{
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200/");
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         filterChain.doFilter(request, response);
     }
     
