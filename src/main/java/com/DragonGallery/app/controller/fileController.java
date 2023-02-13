@@ -67,7 +67,7 @@ public class FileController {
             Map result = cloudinaryService.uploadImage(multipartFile);
             FileEntity file = new FileEntity();
             file.setName((String) result.get("original_filename"));
-            file.setUrl((String) result.get("url"));
+            file.setUrl((String) result.get("secure_url"));
             file.setCloud_id((String) result.get("public_id"));
             file.setFormat("image");
             Folder folder = folderService.getFolderByName(folder_name);
