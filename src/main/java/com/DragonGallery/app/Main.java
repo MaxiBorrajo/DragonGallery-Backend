@@ -19,9 +19,9 @@ public class Main {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-                                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                                        .allowedMethods("*")
                                         .allowedOrigins("http://localhost:4200")
-                                        .allowedHeaders("content-type")
+                                        .allowedHeaders("*")
                                         .allowCredentials(false)
                                         .maxAge(-1);
          
